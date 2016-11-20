@@ -58,13 +58,11 @@ public class SimpleDistributedStreams {
 
             logger.info("The word count map looks like :\n"+wordCountMap);
 
+            // Attempt to shutdown the cluster gracefully with DistributedExecution
             DistributedExecutorService des = new DefaultExecutorService(cache);
             DistributedTaskBuilder<Boolean> taskBuilder = des.createDistributedTaskBuilder(new CacheManagerShutdownTask());
-
             DistributedTask<Boolean> task = taskBuilder.build();
-
             List<Address> addresses = cache.getCacheManager().getMembers();
-
             addresses.stream().forEach(address -> {
                 if (!cacheManager.getAddress().equals(address)) {
                     des.submit(address, task);
