@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<infinispan xmlns="urn:infinispan:config:8.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jgroups>
+        <stack-file name="external-file" path="jgroups.xml" />
+    </jgroups>
+    <cache-container default-cache="streams">
+        <transport stack="external-file" />
+        <distributed-cache name="streams" />
+    </cache-container>
+</infinispan>
+
